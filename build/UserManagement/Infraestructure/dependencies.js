@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.registerUserController = void 0;
+const RegisterUserUseCase_1 = require("../Application/UseCase/RegisterUserUseCase");
+const RegisterUserController_1 = require("./Controller/RegisterUserController");
+const UserMongoRepository_1 = require("./Repository/UserMongoRepository");
+const UserMysqlRepository_1 = require("./Repository/UserMysqlRepository");
+const UserSqliteRepository_1 = require("./Repository/UserSqliteRepository");
+let mysqlRepository = new UserMysqlRepository_1.UserMysqlRepository();
+let mongoRepository = new UserMongoRepository_1.UserMongoRepository();
+let sqliteRepository = new UserSqliteRepository_1.UserSqliteRepository();
+let currentRepository = sqliteRepository;
+let registerUserUseCase = new RegisterUserUseCase_1.RegisterUserUseCase(currentRepository);
+exports.registerUserController = new RegisterUserController_1.RegisterUserController(registerUserUseCase);
